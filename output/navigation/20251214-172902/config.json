@@ -1,0 +1,16 @@
+{
+  "device": "cuda:0",
+  "max_steps": 100,
+  "frames_per_batch": 6000,
+  "n_iters": 20,
+  "scenario_name": "navigation",
+  "n_agents": 3,
+  "num_epochs": 30,
+  "minibatch_size": 400,
+  "lr": 0.0003,
+  "max_grad_norm": 1.0,
+  "clip_epsilon": 0.2,
+  "gamma": 0.99,
+  "lmbda": 0.9,
+  "entropy_eps": 0.0001
+}

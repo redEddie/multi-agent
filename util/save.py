@@ -6,10 +6,11 @@ from pathlib import Path
 import torch
 
 
-def save_artifacts(cfg, env, policy, critic, episode_reward_mean_list):
+def save_artifacts(cfg, env, policy, critic, episode_reward_mean_list, out_dir=None):
     """Save config, rewards, and ONNX exports under output/{scenario}/{timestamp}."""
-    timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
-    out_dir = Path("output") / cfg.scenario_name / timestamp
+    if out_dir is None:
+        timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+        out_dir = Path("output") / cfg.scenario_name / timestamp
     out_dir.mkdir(parents=True, exist_ok=True)
 
     # Save rewards and config
@@ -50,7 +51,14 @@ def save_artifacts(cfg, env, policy, critic, episode_reward_mean_list):
         input_name="observation",
         output_name="state_value",
     )
+    # Save torch state_dicts for playback
+    def _cpu_state(module):
+        return {k: v.detach().cpu() for k, v in module.state_dict().items()}
+
+    torch.save(_cpu_state(policy), out_dir / "policy.pt")
+    torch.save(_cpu_state(critic), out_dir / "critic.pt")
     print(f"Artifacts saved to {out_dir}")
+    return out_dir
 
 
 __all__ = ["save_artifacts"]

@@ -1,0 +1,6 @@
+torch==2.9.1
+torchrl==0.10.1
+vmas==1.5.2
+tqdm==4.67.1
+onnxruntime==1.23.2
+imageio==2.37.2

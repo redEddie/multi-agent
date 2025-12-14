@@ -60,3 +60,5 @@ python -m scripts.train --scenario-name navigation --n-agents 3 \
 python -m scripts.play --scenario-name navigation --n-steps 200 --num-envs 1 --device cuda:0
 ```
 최신 run이 자동으로 선택되며, `output/<scenario>/<timestamp>/rollout.gif`가 생성됩니다.
+
+안정적으로 학습하는 설정은 `navigation`과 `reverse_transport`환경에서 찾았음.

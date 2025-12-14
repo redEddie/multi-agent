@@ -1,4 +1,5 @@
 output/
+!output/navigation/20251214-172902/**
 __pycache__/
 **/__pycache__/
 *.py[cod]

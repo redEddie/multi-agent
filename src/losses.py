@@ -14,8 +14,8 @@ def build_loss(env, policy, critic, cfg):
         action=env.action_key,
         sample_log_prob=("agents", "sample_log_prob"),
         value=("agents", "state_value"),
-        done="done",
-        terminated="terminated",
+        done=("agents", "done"),
+        terminated=("agents", "terminated"),
     )
     loss_module.make_value_estimator(
         ValueEstimators.GAE, gamma=cfg.gamma, lmbda=cfg.lmbda

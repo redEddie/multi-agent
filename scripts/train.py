@@ -1,7 +1,10 @@
 import argparse
 import torch
 import torch.nn as nn
+from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
+from datetime import datetime
+from pathlib import Path
 
 from model.critic import build_critic
 from model.policy import build_policy
@@ -40,22 +43,32 @@ def train(cfg: Config):
     loss_module = build_loss(env, policy, critic, cfg)
     optim = torch.optim.Adam(loss_module.parameters(), lr=cfg.lr)
 
+    # Pre-create output directory for artifacts and logs
+    log_timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+    out_dir = Path("output") / cfg.scenario_name / log_timestamp
+    out_dir.mkdir(parents=True, exist_ok=True)
+    writer = SummaryWriter(log_dir=out_dir)
+
     pbar = tqdm(total=cfg.n_iters, desc="episode_reward_mean = 0")
     episode_reward_mean_list = []
 
-    for _ in range(cfg.n_iters):
+    for it in range(cfg.n_iters):
+        last_losses = {}
         for tensordict_data in collector:
-            # Align done/terminated shapes with per-agent rewards for GAE
+            # Align done/terminated shapes with per-agent rewards for GAE (tutorial style)
             reward = tensordict_data.get(("next", *env.reward_key))
-            for key in [("next", "done"), ("next", "terminated")]:
-                if key in tensordict_data.keys(include_nested=True):
-                    done = tensordict_data.get(key)
-                    if done.shape != reward.shape:
-                        expanded = done.unsqueeze(-2)
-                        expanded = expanded.expand(
-                            *expanded.shape[:-2], reward.shape[-2], expanded.shape[-1]
-                        )
-                        tensordict_data.set(key, expanded)
+            tensordict_data.set(
+                ("next", "agents", "done"),
+                tensordict_data.get(("next", "done"))
+                .unsqueeze(-1)
+                .expand(tensordict_data.get_item_shape(("next", env.reward_key))),
+            )
+            tensordict_data.set(
+                ("next", "agents", "terminated"),
+                tensordict_data.get(("next", "terminated"))
+                .unsqueeze(-1)
+                .expand(tensordict_data.get_item_shape(("next", env.reward_key))),
+            )
             replay_buffer.extend(tensordict_data)
 
             # Compute advantage and value targets
@@ -73,23 +86,37 @@ def train(cfg: Config):
                     loss.backward()
                     nn.utils.clip_grad_norm_(loss_module.parameters(), cfg.max_grad_norm)
                     optim.step()
+                    last_losses = {
+                        "loss_actor": loss_actor.detach().mean().item(),
+                        "loss_critic": loss_critic.detach().mean().item(),
+                        "loss_entropy": loss_entropy.detach().mean().item(),
+                    }
             replay_buffer.empty()
             break  # one batch per iter
 
-        # Eval on last batch reward; fallback to raw reward if episode_reward is absent
-        ep_rew = tensordict_data.get(("next", "agents", "episode_reward"), None)
-        if ep_rew is None:
-            ep_rew = tensordict_data.get(("next", *env.reward_key)).mean()
+        # Eval on last batch reward; log both episode sum (if present) and step mean
+        ep_rew_sum = tensordict_data.get(("next", "agents", "episode_reward"), None)
+        ep_rew_mean = tensordict_data.get(("next", *env.reward_key)).mean()
+        if ep_rew_sum is not None:
+            ep_rew_val = ep_rew_sum.mean()
+            pbar.set_description(f"episode_reward_sum = {ep_rew_val.item():.3f}")
+            writer.add_scalar("train/episode_reward_sum", ep_rew_val.item(), it)
         else:
-            ep_rew = ep_rew.mean()
-        episode_reward_mean_list.append(ep_rew.item())
-        pbar.set_description(f"episode_reward_mean = {ep_rew.item():.3f}")
+            ep_rew_val = ep_rew_mean
+            pbar.set_description(f"episode_reward_mean = {ep_rew_val.item():.3f}")
+            writer.add_scalar("train/episode_reward_mean", ep_rew_val.item(), it)
+        episode_reward_mean_list.append(ep_rew_val.item())
+        writer.add_scalar("train/episode_reward_mean", ep_rew_mean.item(), it)
         pbar.update(1)
+        if last_losses:
+            writer.add_scalar("train/loss_actor", last_losses["loss_actor"], it)
+            writer.add_scalar("train/loss_critic", last_losses["loss_critic"], it)
+            writer.add_scalar("train/loss_entropy", last_losses["loss_entropy"], it)
 
     pbar.close()
     print("Training done. Mean episode reward history:", episode_reward_mean_list)
 
-    save_artifacts(cfg, env, policy, critic, episode_reward_mean_list)
+    save_artifacts(cfg, env, policy, critic, episode_reward_mean_list, out_dir=out_dir)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,337 @@
+
+pytorch2.9.1+cu128:ÎÇ
+ﬁ
+observation
+val_0val_1node_MatMul_1"MatMulJr
+	namespacee: torch.nn.modules.container.Sequential/0: torch.nn.modules.linear.Linear/linear: aten.linear.defaultJÑ
+pkg.torch.onnx.class_hierarchyb['torch.nn.modules.container.Sequential', 'torch.nn.modules.linear.Linear', 'aten.linear.default']Jû
+pkg.torch.onnx.fx_nodeÉ%linear : [num_users=1] = call_function[target=torch.ops.aten.linear.default](args = (%input, %p_0_weight, %p_0_bias), kwargs = {})J1
+pkg.torch.onnx.name_scopes['', '0', 'linear']J⁄
+pkg.torch.onnx.stack_traceªFile "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/torch/nn/modules/linear.py", line 134, in forward
+    return F.linear(input, self.weight, self.bias)
+’
+val_1
+0.biaslinearnode_linear"AddJr
+	namespacee: torch.nn.modules.container.Sequential/0: torch.nn.modules.linear.Linear/linear: aten.linear.defaultJÑ
+pkg.torch.onnx.class_hierarchyb['torch.nn.modules.container.Sequential', 'torch.nn.modules.linear.Linear', 'aten.linear.default']Jû
+pkg.torch.onnx.fx_nodeÉ%linear : [num_users=1] = call_function[target=torch.ops.aten.linear.default](args = (%input, %p_0_weight, %p_0_bias), kwargs = {})J1
+pkg.torch.onnx.name_scopes['', '0', 'linear']J⁄
+pkg.torch.onnx.stack_traceªFile "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/torch/nn/modules/linear.py", line 134, in forward
+    return F.linear(input, self.weight, self.bias)
+ö
+lineartanh	node_tanh"TanhJp
+	namespacec: torch.nn.modules.container.Sequential/1: torch.nn.modules.activation.Tanh/tanh: aten.tanh.defaultJÑ
+pkg.torch.onnx.class_hierarchyb['torch.nn.modules.container.Sequential', 'torch.nn.modules.activation.Tanh', 'aten.tanh.default']JÉ
+pkg.torch.onnx.fx_nodei%tanh : [num_users=1] = call_function[target=torch.ops.aten.tanh.default](args = (%linear,), kwargs = {})J/
+pkg.torch.onnx.name_scopes['', '1', 'tanh']J»
+pkg.torch.onnx.stack_trace©File "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/torch/nn/modules/activation.py", line 430, in forward
+    return torch.tanh(input)
+‹
+tanh
+val_2val_3node_MatMul_3"MatMulJt
+	namespaceg: torch.nn.modules.container.Sequential/2: torch.nn.modules.linear.Linear/linear_1: aten.linear.defaultJÑ
+pkg.torch.onnx.class_hierarchyb['torch.nn.modules.container.Sequential', 'torch.nn.modules.linear.Linear', 'aten.linear.default']Jü
+pkg.torch.onnx.fx_nodeÑ%linear_1 : [num_users=1] = call_function[target=torch.ops.aten.linear.default](args = (%tanh, %p_2_weight, %p_2_bias), kwargs = {})J3
+pkg.torch.onnx.name_scopes['', '2', 'linear_1']J⁄
+pkg.torch.onnx.stack_traceªFile "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/torch/nn/modules/linear.py", line 134, in forward
+    return F.linear(input, self.weight, self.bias)
+ﬁ
+val_3
+2.biaslinear_1node_linear_1"AddJt
+	namespaceg: torch.nn.modules.container.Sequential/2: torch.nn.modules.linear.Linear/linear_1: aten.linear.defaultJÑ
+pkg.torch.onnx.class_hierarchyb['torch.nn.modules.container.Sequential', 'torch.nn.modules.linear.Linear', 'aten.linear.default']Jü
+pkg.torch.onnx.fx_nodeÑ%linear_1 : [num_users=1] = call_function[target=torch.ops.aten.linear.default](args = (%tanh, %p_2_weight, %p_2_bias), kwargs = {})J3
+pkg.torch.onnx.name_scopes['', '2', 'linear_1']J⁄
+pkg.torch.onnx.stack_traceªFile "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/torch/nn/modules/linear.py", line 134, in forward
+    return F.linear(input, self.weight, self.bias)
+®
+linear_1tanh_1node_tanh_1"TanhJr
+	namespacee: torch.nn.modules.container.Sequential/3: torch.nn.modules.activation.Tanh/tanh_1: aten.tanh.defaultJÑ
+pkg.torch.onnx.class_hierarchyb['torch.nn.modules.container.Sequential', 'torch.nn.modules.activation.Tanh', 'aten.tanh.default']Já
+pkg.torch.onnx.fx_nodem%tanh_1 : [num_users=1] = call_function[target=torch.ops.aten.tanh.default](args = (%linear_1,), kwargs = {})J1
+pkg.torch.onnx.name_scopes['', '3', 'tanh_1']J»
+pkg.torch.onnx.stack_trace©File "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/torch/nn/modules/activation.py", line 430, in forward
+    return torch.tanh(input)
+‡
+tanh_1
+val_4val_5node_MatMul_5"MatMulJt
+	namespaceg: torch.nn.modules.container.Sequential/4: torch.nn.modules.linear.Linear/linear_2: aten.linear.defaultJÑ
+pkg.torch.onnx.class_hierarchyb['torch.nn.modules.container.Sequential', 'torch.nn.modules.linear.Linear', 'aten.linear.default']J°
+pkg.torch.onnx.fx_nodeÜ%linear_2 : [num_users=1] = call_function[target=torch.ops.aten.linear.default](args = (%tanh_1, %p_4_weight, %p_4_bias), kwargs = {})J3
+pkg.torch.onnx.name_scopes['', '4', 'linear_2']J⁄
+pkg.torch.onnx.stack_traceªFile "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/torch/nn/modules/linear.py", line 134, in forward
+    return F.linear(input, self.weight, self.bias)
+‡
+val_5
+4.biaslinear_2node_linear_2"AddJt
+	namespaceg: torch.nn.modules.container.Sequential/4: torch.nn.modules.linear.Linear/linear_2: aten.linear.defaultJÑ
+pkg.torch.onnx.class_hierarchyb['torch.nn.modules.container.Sequential', 'torch.nn.modules.linear.Linear', 'aten.linear.default']J°
+pkg.torch.onnx.fx_nodeÜ%linear_2 : [num_users=1] = call_function[target=torch.ops.aten.linear.default](args = (%tanh_1, %p_4_weight, %p_4_bias), kwargs = {})J3
+pkg.torch.onnx.name_scopes['', '4', 'linear_2']J⁄
+pkg.torch.onnx.stack_traceªFile "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/torch/nn/modules/linear.py", line 134, in forward
+    return F.linear(input, self.weight, self.bias)
+[
+linear_2	loc_scalesplit_split_1node_Split_13"Split*
+axis†*
+num_outputs†
+Õ	
+split_split_1
+val_9add_28node_add_28"AddJ¡
+	namespace≥: torch.nn.modules.container.Sequential/5: tensordict.nn.distributions.continuous.NormalParamExtractor/5.scale_mapping: tensordict.nn.utils.biased_softplus/add_28: aten.add.TensorJ≈
+pkg.torch.onnx.class_hierarchy¢['torch.nn.modules.container.Sequential', 'tensordict.nn.distributions.continuous.NormalParamExtractor', 'tensordict.nn.utils.biased_softplus', 'aten.add.Tensor']Jô
+pkg.torch.onnx.fx_node%add_28 : [num_users=1] = call_function[target=torch.ops.aten.add.Tensor](args = (%getitem_1, 0.5254586935043335), kwargs = {})JD
+pkg.torch.onnx.name_scopes&['', '5', '5.scale_mapping', 'add_28']J¨
+pkg.torch.onnx.stack_traceçFile "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/tensordict/nn/distributions/continuous.py", line 86, in forward
+    scale = self.scale_mapping(scale).clamp_min(self.scale_lb)
+  File "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/tensordict/nn/utils.py", line 70, in forward
+    return torch.nn.functional.softplus(x + self.bias) + self.min_val
+∫	
+add_28tmpn3"SoftplusJ…
+	namespaceª: torch.nn.modules.container.Sequential/5: tensordict.nn.distributions.continuous.NormalParamExtractor/5.scale_mapping: tensordict.nn.utils.biased_softplus/softplus: aten.softplus.defaultJÀ
+pkg.torch.onnx.class_hierarchy®['torch.nn.modules.container.Sequential', 'tensordict.nn.distributions.continuous.NormalParamExtractor', 'tensordict.nn.utils.biased_softplus', 'aten.softplus.default']Jã
+pkg.torch.onnx.fx_nodeq%softplus : [num_users=1] = call_function[target=torch.ops.aten.softplus.default](args = (%add_28,), kwargs = {})JF
+pkg.torch.onnx.name_scopes(['', '5', '5.scale_mapping', 'softplus']J¨
+pkg.torch.onnx.stack_traceçFile "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/tensordict/nn/distributions/continuous.py", line 86, in forward
+    scale = self.scale_mapping(scale).clamp_min(self.scale_lb)
+  File "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/tensordict/nn/utils.py", line 70, in forward
+    return torch.nn.functional.softplus(x + self.bias) + self.min_val
+À	
+add_28
+threshold_casttmp_1n9"GreaterJ…
+	namespaceª: torch.nn.modules.container.Sequential/5: tensordict.nn.distributions.continuous.NormalParamExtractor/5.scale_mapping: tensordict.nn.utils.biased_softplus/softplus: aten.softplus.defaultJÀ
+pkg.torch.onnx.class_hierarchy®['torch.nn.modules.container.Sequential', 'tensordict.nn.distributions.continuous.NormalParamExtractor', 'tensordict.nn.utils.biased_softplus', 'aten.softplus.default']Jã
+pkg.torch.onnx.fx_nodeq%softplus : [num_users=1] = call_function[target=torch.ops.aten.softplus.default](args = (%add_28,), kwargs = {})JF
+pkg.torch.onnx.name_scopes(['', '5', '5.scale_mapping', 'softplus']J¨
+pkg.torch.onnx.stack_traceçFile "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/tensordict/nn/distributions/continuous.py", line 86, in forward
+    scale = self.scale_mapping(scale).clamp_min(self.scale_lb)
+  File "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/tensordict/nn/utils.py", line 70, in forward
+    return torch.nn.functional.softplus(x + self.bias) + self.min_val
+…	
+tmp_1
+add_28
+tmpsoftplusn10"WhereJ…
+	namespaceª: torch.nn.modules.container.Sequential/5: tensordict.nn.distributions.continuous.NormalParamExtractor/5.scale_mapping: tensordict.nn.utils.biased_softplus/softplus: aten.softplus.defaultJÀ
+pkg.torch.onnx.class_hierarchy®['torch.nn.modules.container.Sequential', 'tensordict.nn.distributions.continuous.NormalParamExtractor', 'tensordict.nn.utils.biased_softplus', 'aten.softplus.default']Jã
+pkg.torch.onnx.fx_nodeq%softplus : [num_users=1] = call_function[target=torch.ops.aten.softplus.default](args = (%add_28,), kwargs = {})JF
+pkg.torch.onnx.name_scopes(['', '5', '5.scale_mapping', 'softplus']J¨
+pkg.torch.onnx.stack_traceçFile "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/tensordict/nn/distributions/continuous.py", line 86, in forward
+    scale = self.scale_mapping(scale).clamp_min(self.scale_lb)
+  File "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/tensordict/nn/utils.py", line 70, in forward
+    return torch.nn.functional.softplus(x + self.bias) + self.min_val
+∫	
+softplus
+val_10add_37node_add_37"AddJ¡
+	namespace≥: torch.nn.modules.container.Sequential/5: tensordict.nn.distributions.continuous.NormalParamExtractor/5.scale_mapping: tensordict.nn.utils.biased_softplus/add_37: aten.add.TensorJ≈
+pkg.torch.onnx.class_hierarchy¢['torch.nn.modules.container.Sequential', 'tensordict.nn.distributions.continuous.NormalParamExtractor', 'tensordict.nn.utils.biased_softplus', 'aten.add.Tensor']Jä
+pkg.torch.onnx.fx_nodep%add_37 : [num_users=1] = call_function[target=torch.ops.aten.add.Tensor](args = (%softplus, 0.01), kwargs = {})JD
+pkg.torch.onnx.name_scopes&['', '5', '5.scale_mapping', 'add_37']J¨
+pkg.torch.onnx.stack_traceçFile "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/tensordict/nn/distributions/continuous.py", line 86, in forward
+    scale = self.scale_mapping(scale).clamp_min(self.scale_lb)
+  File "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/tensordict/nn/utils.py", line 70, in forward
+    return torch.nn.functional.softplus(x + self.bias) + self.min_val
+∂
+add_37
+val_12	clamp_minnode_clamp_min"ClipJñ
+	namespaceà: torch.nn.modules.container.Sequential/5: tensordict.nn.distributions.continuous.NormalParamExtractor/clamp_min: aten.clamp_min.defaultJ•
+pkg.torch.onnx.class_hierarchyÇ['torch.nn.modules.container.Sequential', 'tensordict.nn.distributions.continuous.NormalParamExtractor', 'aten.clamp_min.default']Jî
+pkg.torch.onnx.fx_nodez%clamp_min : [num_users=1] = call_function[target=torch.ops.aten.clamp_min.default](args = (%add_37, 0.0001), kwargs = {})J4
+pkg.torch.onnx.name_scopes['', '5', 'clamp_min']JÙ
+pkg.torch.onnx.stack_trace’File "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/torch/nn/modules/container.py", line 250, in forward
+    input = module(input)
+  File "/home/user/miniconda3/envs/marl/lib/python3.10/site-packages/tensordict/nn/distributions/continuous.py", line 86, in forward
+    scale = self.scale_mapping(scale).clamp_min(self.scale_lb)
+main_graph*JÄB0.biasj
+locationpolicy.onnx.dataj
+offset0j
+length1024p*MÄB2.biasj
+locationpolicy.onnx.dataj
+offset1024j
+length1024p*B4.biasJ`ÍY=∞—ºnx<tÇ6=*OÄBval_0j
+locationpolicy.onnx.dataj
+offset6144j
+length18432p*RÄÄBval_2j
+locationpolicy.onnx.dataj
+offset24576j
+length262144p*NÄBval_4j
+locationpolicy.onnx.dataj
+offset2048j
+length4096p*Bthreshold_castJ  †A*Bval_12J∑—8*Bval_9JvÑ?*Bval_10J
+◊#<ZŒ
+observation
+
+s31
+
+"=
+/pkg.torch.export.graph_signature.InputSpec.kind
+USER_INPUT"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"*
+!pkg.torch.onnx.original_node_nameinputb"
+	loc_scale
+
+s31
+
+b`
+	clamp_min
+
+
+
+"?
+0pkg.torch.export.graph_signature.OutputSpec.kindUSER_OUTPUTj¡
+0.bias
+	
+Ä"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"-
+!pkg.torch.onnx.original_node_namep_0_biasj¡
+2.bias
+	
+Ä"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"-
+!pkg.torch.onnx.original_node_namep_2_biasj¿
+4.bias
+
+
+"<
+/pkg.torch.export.graph_signature.InputSpec.kind	PARAMETER"=
+5pkg.torch.export.graph_signature.InputSpec.persistentNone"-
+!pkg.torch.onnx.original_node_namep_4_biasjN
+val_0
+	
+
+Ä"4
+$pkg.onnxscript.optimizer.folded_from['0.weight']jO
+val_2
+
+
+Ä
+Ä"4
+$pkg.onnxscript.optimizer.folded_from['2.weight']jN
+val_4
+	
+Ä
+"4
+$pkg.onnxscript.optimizer.folded_from['4.weight']jO
+threshold_cast
+ "5
+$pkg.onnxscript.optimizer.folded_from['threshold']jD
+val_12
+ "2
+$pkg.onnxscript.optimizer.folded_from
+['val_11']j
+val_9
+ j
+val_10
+ j
+val_1
+
+s31
+
+Äj 
+linear
+
+s31
+
+Äj
+tanh
+
+s31
+
+Äj
+val_3
+
+s31
+
+Äj"
+linear_1
+
+s31
+
+Äj 
+tanh_1
+
+s31
+
+Äj
+val_5
+
+s31
+
+j!
+linear_2
+
+s31
+
+j&
+split_split_1
+
+s31
+
+j
+add_28
+
+s31
+
+j
+tmp
+
+s31
+
+j
+tmp_1
+	
+s31
+
+j!
+softplus
+
+s31
+
+j
+add_37
+
+
+
+ÇÏ
+0pkg.torch.export.ExportedProgram.graph_signature∑
+# inputs
+p_0_weight: PARAMETER target='0.weight'
+p_0_bias: PARAMETER target='0.bias'
+p_2_weight: PARAMETER target='2.weight'
+p_2_bias: PARAMETER target='2.bias'
+p_4_weight: PARAMETER target='4.weight'
+p_4_bias: PARAMETER target='4.bias'
+input: USER_INPUT
+
+# outputs
+getitem: USER_OUTPUT
+clamp_min: USER_OUTPUT
+ÇJ
+2pkg.torch.export.ExportedProgram.range_constraints{s31: VR[0, int_oo]}B
+ 

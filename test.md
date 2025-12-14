@@ -1,12 +1,16 @@
 # Test
 Default environment
-  navigaton(난이도 쉬움) 
+  navigaton 
   ```
   python3 -m scripts.train
   ```
 
 Other environments
-  wheel(난이도 어려움): `--scenario-name wheel --n-agents 4`
-  reverse transport(난이도 쉬움): `--scenario-name reverse_transport --n-agents 3`
-  buzz wire(난이도 중간): `--scenario-name buzz_wire`
+  wheel: `--scenario-name wheel --n-agents 4`
+  reverse transport: `--scenario-name reverse_transport --n-agents 3`
+  buzz wire: `--scenario-name buzz_wire`
 
+체감난이도
+  쉬움: navigation, reverse transport
+  중간: buzz wire
+  어려움: wheel

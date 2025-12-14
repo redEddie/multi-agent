@@ -20,37 +20,39 @@ python -m scripts.train \
 --lmbda 0.9
 ```
 
+### Reverse transport (3 agents)
+옮기는 속도가 느리므로 `max-steps` 를 늘림.
+```bash
+python3 -m scripts.train \
+  --scenario-name reverse_transport \
+  --n-agents 3 \
+  --frames-per-batch 32768 \
+  --max-steps 500 \
+  --n-iters 250 \
+  --num-epochs 4 \
+  --minibatch-size 8192 \
+  --lr 3e-4 \
+  --entropy-eps 1e-4
+```
+
 ### Wheel (4 agents)
-환경이 까다로워서 **수집량과 배치 크기를 키워서** 안정적으로 학습하는 설정:
+환경이 까다로워서 **수집량과 배치 크기를 키워서** 
+아직 안정적으로 학습하는 설정을 찾진 못 함.
 
 ```bash
 python3 -m scripts.train \
   --scenario-name wheel \
   --n-agents 4 \
-  --frames-per-batch 12000 \
-  --max-steps 150 \
-  --n-iters 300 \
+  --frames-per-batch 6000 \
+  --max-steps 100 \
+  --n-iters 500 \
   --num-epochs 4 \
-  --minibatch-size 2048 \
-  --lr 2.5e-4 \
+  --minibatch-size 4096 \
+  --lr 1e-3 \
   --clip-epsilon 0.2 \
-  --entropy-eps 2e-4 \
+  --entropy-eps 1e-2 \
   --gamma 0.99 \
   --lmbda 0.95
-```
-
-### Reverse transport (3 agents)
-```bash
-python3 -m scripts.train \
-  --scenario-name reverse_transport \
-  --n-agents 3 \
-  --frames-per-batch 8000 \
-  --max-steps 120 \
-  --n-iters 250 \
-  --num-epochs 4 \
-  --minibatch-size 1536 \
-  --lr 3e-4 \
-  --entropy-eps 1e-4
 ```
 
 ### Buzz wire
@@ -59,13 +61,13 @@ python3 -m scripts.train \
 ```bash
 python3 -m scripts.train \
   --scenario-name buzz_wire \
-  --frames-per-batch 8000 \
+  --frames-per-batch 4096 \
   --max-steps 150 \
-  --n-iters 250 \
-  --num-epochs 4 \
-  --minibatch-size 1536 \
-  --lr 3e-4 \
-  --entropy-eps 3e-4
+  --n-iters 20 \
+  --num-epochs 3 \
+  --minibatch-size 1024 \
+  --lr 5e-4 \
+  --entropy-eps 5e-4
 ```
 
 ## 공통 팁
